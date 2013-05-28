@@ -33,10 +33,10 @@ class Kernel():
     def getWaiting(self):
         return self.getIO().getWaiting()
     
-    def getTemporizador(self):
-        return self.temporizador
+    def getClock(self):
+        return self.clock
     
-    def __init__(self, scheduler, cpu, mmu, io, end, temporizador):
+    def __init__(self, scheduler, cpu, mmu, io, end, clock):
         self.scheduler = scheduler
         self.cpu = cpu
         cpu.setKernel(self)
@@ -45,7 +45,7 @@ class Kernel():
         io.setKernel(self)
         self.end = end
         self.kernelMode = False
-        self.temporizador = temporizador
+        self.clock = clock
         
     def handle(self, interruption):
         interruption.doIt(self)
@@ -82,4 +82,5 @@ class Kernel():
         
     def turnOn(self):
         self.getScheduler().contextSwitch()
-        self.getTemporizador().startUp()
+        self.getClock().startUp()
+        self.getIO().startUp()

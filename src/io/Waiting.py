@@ -17,7 +17,7 @@ class Waiting():
         self.getQueue().put(pcb)
         
     def get(self):
-        self.getQueue().get()
+        return self.getQueue().get()
         
     def isEmpty(self):
         return self.getQueue().qsize() == 0

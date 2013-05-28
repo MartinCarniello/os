@@ -6,7 +6,7 @@ Created on 25/05/2013
 
 from scheduler import ReadyFIFO
 from estructuraCpu import Cpu
-from temporizador import Temporizador
+from temporizador import Clock
 from io import IO
 from executionPolitic import Simple
 from end import End
@@ -44,14 +44,13 @@ if __name__ == '__main__':
     fifo = ReadyFIFO.ReadyFIFO(cpu, policy)
     fifo.put(pcbP1)
     fifo.put(pcbP2)
-    io = IO.IO()
+    io = IO.IO(memory)
     end = End.End()
     
-    temporizador = Temporizador.Temporizador()
-    temporizador.addObserver(cpu)
-    temporizador.addObserver(fifo)
-    temporizador.addObserver(io)
+    clock = Clock.Clock()
+    clock.addObserver(cpu)
+    clock.addObserver(fifo)
     
-    kernel = Kernel.Kernel(fifo, cpu, memory, io, end, temporizador)
+    kernel = Kernel.Kernel(fifo, cpu, memory, io, end, clock)
     
     kernel.turnOn()
