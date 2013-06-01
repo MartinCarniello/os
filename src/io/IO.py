@@ -70,9 +70,9 @@ class IO(threading.Thread):
                 #self.instructionExecute(ins)    
                 
                 if self.getPCB().isEnded():
-                    self.getKernel().handle(IOToEndInterruption())
+                    self.getKernel().handle(IOToEndInterruption.IOToEndInterruption())
                 else:
-                    self.getKernel().handle(IOToReadyInterruption())
+                    self.getKernel().handle(IOToReadyInterruption.IOToReadyInterruption())
             
     def instructionExecute(self, instruction):
         time.sleep(instruction.getTime())

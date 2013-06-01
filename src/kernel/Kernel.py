@@ -38,6 +38,7 @@ class Kernel():
     
     def __init__(self, scheduler, cpu, mmu, io, end, clock):
         self.scheduler = scheduler
+        scheduler.getExecutionPolitic().setKernel(self)
         self.cpu = cpu
         cpu.setKernel(self)
         self.mmu = mmu

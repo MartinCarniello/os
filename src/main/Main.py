@@ -4,14 +4,14 @@ Created on 25/05/2013
 @author: Carne
 '''
 
-from scheduler import ReadyFIFO
+from scheduler import ReadyFIFO, ReadyPriority
 from estructuraCpu import Cpu
 from temporizador import Clock
 from io import IO
-from executionPolitic import Simple
+from executionPolitic import Simple, RoundRobin
 from end import End
 from kernel import Kernel
-from pcb import PCB
+from pcb import PCB, PCBPriority
 from programaEInstrucciones import Instruction
 from memory import Memory
 from process import Process
@@ -39,18 +39,23 @@ if __name__ == '__main__':
     pcbP1 = PCB.PCB(1, len(p1.getInstructions()))
     pcbP2 = PCB.PCB(2, len(p2.getInstructions()))
     
+    #pcbP1 = PCBPriority.PCBPriority(pcbP1, 10)
+    #pcbP2 = PCBPriority.PCBPriority(pcbP2, 3)
+    
     cpu = Cpu.Cpu(memory)
     policy = Simple.Simple()
-    fifo = ReadyFIFO.ReadyFIFO(cpu, policy)
-    fifo.put(pcbP1)
-    fifo.put(pcbP2)
+    #policy = RoundRobin.RoundRobin(1)
+    scheduler = ReadyFIFO.ReadyFIFO(cpu, policy)
+    #scheduler = ReadyPriority.ReadyPriority(cpu, policy)
+    scheduler.put(pcbP1)
+    scheduler.put(pcbP2)
     io = IO.IO(memory)
     end = End.End()
     
     clock = Clock.Clock()
     clock.addObserver(cpu)
-    clock.addObserver(fifo)
+    clock.addObserver(scheduler)
     
-    kernel = Kernel.Kernel(fifo, cpu, memory, io, end, clock)
+    kernel = Kernel.Kernel(scheduler, cpu, memory, io, end, clock)
     
     kernel.turnOn()

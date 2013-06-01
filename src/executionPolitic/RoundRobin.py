@@ -4,12 +4,12 @@ Created on 04/05/2013
 @author: Carne
 '''
 
-import executionPolitic
+from executionPolitic import ExecutionPolitic
 from kernel import TimeOutInterruption
 
-class RoundRobin(executionPolitic.ExecutionPolitic):
-    def __init__(self, quantum):
-        super(RoundRobin, self).__init__()
+class RoundRobin(ExecutionPolitic.ExecutionPolitic):
+    def __init__(self, quantum, kernel=None):
+        ExecutionPolitic.ExecutionPolitic.__init__(self, kernel)
         self.quantum = quantum
         self.actual = 0
     

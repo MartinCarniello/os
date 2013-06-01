@@ -12,7 +12,7 @@ class Scheduler():
         
     def getCpu(self):
         return self.cpu
-    
+
     def isEmpty(self):
         return self.getQueue().qsize() == 0
 
