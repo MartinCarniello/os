@@ -6,8 +6,9 @@ Created on 25/05/2013
 
 class Memory():
 
-    def __init__(self):
+    def __init__(self, allocationMethod):
         self.memory = {}
+        self.allocation = allocationMethod
         
     def fetchInstruction(self, idProcess, pc):
         return self.memory[idProcess][pc]
