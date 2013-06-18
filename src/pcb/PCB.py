@@ -5,7 +5,7 @@ Created on 04/05/2013
 '''
 
 class PCB():
-    def __init__(self, pid, nInstructions):
+    def __init__(self, pid, nInstructions=None):
         self.setPC(0)
         self.setPID(pid)
         self.setNumberOfInstructions(nInstructions)

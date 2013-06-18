@@ -22,14 +22,9 @@ class MMU():
     
     def setDisk(self, disk):
         self.disk = disk
-        
-    def swapIn(self, programInstructions, pcb):
-        pass
-    
+            
     def swapOut(self, programInstructions, pcb):
         pass
     
-    def load(self, pid):
-        programInstructions = self.getDisk().getProgramInstructions(pid)
-        pcb = PCB(pid, programInstructions.getSize())
-        self.swapIn(programInstructions, pcb)
+    def swapIn(self, blockList, pid):
+        pass
