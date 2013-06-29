@@ -15,6 +15,12 @@ class Block():
     def getLimit(self):
         return self.limit
     
+    def setBase(self, base):
+        self.base = base
+        
+    def setLimit(self, limit):
+        self.limit = limit
+    
     def size(self):
         return self.getLimit() - self.getBase() + 1
     
@@ -35,12 +41,19 @@ class FreeBlock():
         return len(self.getBlocks())
     
 class OccupedBlock():
-    def __init__(self, pcb):
+    def __init__(self):
         self.blocks = []
-        self.pcb = pcb
         
     def getBlocks(self):
         return self.blocks
+    
+    def put(self, pcb, aBlock):
+        self.getBlocks().append((pcb, aBlock))
+        
+    def get(self, pid):
+        for block in self.getBlocks():
+            if pid == block[0]:
+                return block
     
     def getPCB(self):
         return self.pcb
